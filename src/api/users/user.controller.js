@@ -36,10 +36,29 @@ const getUser = async (req, res)=>{
       return res.status(404).json({message: 'Usuario no encontrado'})
       }
       res.status(200).json(user);
-  }catch(err){
-    console.log(err)
+  } catch(err){
+    res.status(500).json({ message: 'Error al listar usuario' });
+  }
+}
+
+const updateUser = async (req, res)=>{
+  try {
+    const id = req.params.id;
+    const user = await User.findByPk(id);
+    if(!user){
+      return res.status(404).json({message: 'Usuario no encontrado'})
+      }
+      const {username, email, password} = req.body;
+      if(username) user.username = username;
+      if(email) user.email = email;
+      if(password) user.password = await bcrypt.hash(password, 10);
+      await user.save();
+      res.status(200).json(user);
+    
+  } catch (error) {
+    res.status(500).json({ message: 'Error al editar usuario' });
   }
 }
 
 
-module.exports = { createUser, getAllUsers, getUser };
+module.exports = { createUser, getAllUsers, getUser, updateUser };
