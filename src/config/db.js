@@ -1,16 +1,15 @@
 const { Sequelize } = require('sequelize');
 
 // Crear la instancia de Sequelize con la configuración del pool
-const sequelize = new Sequelize('inventech', 'root', 'Wyms0528', {
-  host: 'localhost',
-  dialect: 'mysql',
-  pool: {
-    max: 5, // Número máximo de conexiones en el pool
-    min: 0, // Número mínimo de conexiones en el pool
-    acquire: 30000, // Tiempo máximo, en milisegundos, que Sequelize intentará obtener una conexión antes de lanzar un error
-    idle: 10000 // Tiempo máximo, en milisegundos, que una conexión puede estar inactiva antes de ser liberada
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
+      host: process.env.DB_HOST,
+      dialect: 'mysql'
   }
-});
+);
 
 sequelize.sync()
     .then(() => {

@@ -2,11 +2,11 @@ const { DataTypes } = require('sequelize');
 const conexion = require('../../config/db');
 
 const User = conexion.define('User', {
-  username: { type: DataTypes.STRING, allowNull: false },
+  nombres: { type: DataTypes.STRING, allowNull: false },
   email: { type: DataTypes.STRING, allowNull: false, unique: false },
   password: { type: DataTypes.STRING, allowNull: false },
-  role: { type: DataTypes.STRING, allowNull: false }, // técnico, Admin, Cliente
-  status: { type: DataTypes.STRING, allowNull: false }, // activo, inactivo
+  id_rol: { type: DataTypes.INTEGER, allowNull: false }, // técnico, Admin, Cliente,
+  fecha_creacion : {type: DataTypes.timestamps, allowNull: false}
 }, {
   tableName: 'users',
   timestamps: false
