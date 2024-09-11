@@ -14,7 +14,7 @@ sequelize.authenticate()
     .then(() => {
         console.log('Conexión a la base de datos establecida correctamente');
         app.listen( 3004, () => {
-            console.log(`El servidor está corriendo en el puerto ${3000}`);
+            console.log(`El servidor está corriendo en el puerto ${3004}`);
         });
     })
     .catch(err => {
