@@ -13,7 +13,7 @@ routes(app); //Acrhivo que maneja las rutas de toda la app
 sequelize.authenticate()
     .then(() => {
         console.log('Conexión a la base de datos establecida correctamente');
-        app.listen( 3000, () => {
+        app.listen( 3004, () => {
             console.log(`El servidor está corriendo en el puerto ${3000}`);
         });
     })
@@ -24,4 +24,5 @@ sequelize.authenticate()
     app.use((err, req, res, next) => {
       console.error(err.stack);
       res.status(500).send('Ocurrió un error en el servidor');
+      next();
   });

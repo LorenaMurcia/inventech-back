@@ -4,15 +4,15 @@ const User =  require('../users/user.model');
 
 const createUser = async (req, res) =>{
   try {
-    const {username, email, password} = req.body;
+    const {nombres, email, password} = req.body;
     //validaciones campos vacios
-    if (!username || !email || !password) {
+    if (!nombres || !email || !password) {
       return res.status(400).json({ message: 'Todos los campos son obligatorios' });
     }
     //encryptar la contraseña
     const hashedPassword = await bcrypt.hash(password, 10);
     //crear el usuario
-    const user = await  User.create({username, email, password: hashedPassword});
+    const user = await  User.create({nombres, email, password: hashedPassword});
     res.status(201).json(user);
   } catch (error) {
     console.log(error)
@@ -48,8 +48,8 @@ const updateUser = async (req, res)=>{
     if(!user){
       return res.status(404).json({message: 'Usuario no encontrado'})
       }
-      const {username, email, password} = req.body;
-      if(username) user.username = username;
+      const {nombres, email, password} = req.body;
+      if(nombres) user.nombres = nombres;
       if(email) user.email = email;
       if(password) user.password = await bcrypt.hash(password, 10);
       await user.save();

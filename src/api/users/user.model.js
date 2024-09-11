@@ -6,9 +6,9 @@ const User = conexion.define('User', {
   email: { type: DataTypes.STRING, allowNull: false, unique: false },
   password: { type: DataTypes.STRING, allowNull: false },
   id_rol: { type: DataTypes.INTEGER, allowNull: false }, // técnico, Admin, Cliente,
-  fecha_creacion : {type: DataTypes.timestamps, allowNull: false}
+  fecha_creacion : {type: DataTypes.DATE, allowNull: false}
 }, {
-  tableName: 'users',
+  tableName: 'usuarios',
   timestamps: false
 });
 

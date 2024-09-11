@@ -1,3 +1,4 @@
+require('dotenv').config()
 const { Sequelize } = require('sequelize');
 
 // Crear la instancia de Sequelize con la configuración del pool
