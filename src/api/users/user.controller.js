@@ -4,24 +4,26 @@ const User =  require('../users/user.model');
 
 const createUser = async (req, res) =>{
   try {
-    const {nombres, email, password} = req.body;
+    const {nombres, correo, contraseña, id_rol, fecha_creacion} = req.body;
     //validaciones campos vacios
-    if (!nombres || !email || !password) {
+    if (!nombres || !correo || !contraseña) {
       return res.status(400).json({ message: 'Todos los campos son obligatorios' });
     }
     //encryptar la contraseña
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedcontraeña = await bcrypt.hash(contraseña, 10);
     //crear el usuario
-    const user = await  User.create({nombres, email, password: hashedPassword});
+    const user = await  User.create({nombres, correo, contraseña: hashedcontraeña, id_rol, fecha_creacion});
+    console.log(user)
     res.status(201).json(user);
   } catch (error) {
-    console.log(error)
+    res.status(500).json({ message: 'Error al crear', error: error.message });
   }
 }
 
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.findAll();
+    console.log(users)
     res.status(200).json(users);
   } catch (error) {
      res.status(500).json({ message: 'Error al listar usuarios' });
@@ -48,10 +50,10 @@ const updateUser = async (req, res)=>{
     if(!user){
       return res.status(404).json({message: 'Usuario no encontrado'})
       }
-      const {nombres, email, password} = req.body;
+      const {nombres, correo, contraseña} = req.body;
       if(nombres) user.nombres = nombres;
-      if(email) user.email = email;
-      if(password) user.password = await bcrypt.hash(password, 10);
+      if(correo) user.correo = correo;
+      if(contraseña) user.contraseña = await bcrypt.hash(contraseña, 10);
       await user.save();
       res.status(200).json(user);
     
