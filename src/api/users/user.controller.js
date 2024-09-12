@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 const User =  require('../users/user.model');
-
+const Rol = require('../rol/rol.model');
 
 const createUser = async (req, res) =>{
   try {
@@ -21,11 +21,18 @@ const createUser = async (req, res) =>{
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await User.findAll();
+    const users = await User.findAll({
+      attributes:['id_usuario','nombres'],
+      include:{
+        model:Rol,
+        as:'rol',
+        attributes:['nombre']
+      }
+    });
     console.log(users)
     res.status(200).json(users);
   } catch (error) {
-     res.status(500).json({ message: 'Error al listar usuarios' });
+     res.status(500).json({ message: 'Error al listar usuarios' + error});
   }
 }
 
