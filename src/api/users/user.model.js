@@ -15,7 +15,7 @@ const User = conexion.define('User', {
   fecha_creacion : {type: DataTypes.DATE, allowNull: false}
 }, {
   tableName: 'usuarios',
-  timestamps: true,
+  timestamps: false,
 });
 
 User.belongsTo(Rol,{ 
