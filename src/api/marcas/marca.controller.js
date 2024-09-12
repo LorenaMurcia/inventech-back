@@ -1,5 +1,4 @@
-const Marca = require('../marcas/marca.model')
-
+const Marca = require('./marca.model')
 
 const getAll = async (req, res)=>{
   try {
