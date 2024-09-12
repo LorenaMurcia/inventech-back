@@ -13,7 +13,6 @@ const createUser = async (req, res) =>{
     const hashedcontraeña = await bcrypt.hash(contraseña, 10);
     //crear el usuario
     const user = await  User.create({nombres, correo, contraseña: hashedcontraeña, id_rol, fecha_creacion});
-    console.log(user)
     res.status(201).json(user);
   } catch (error) {
     res.status(500).json({ message: 'Error al crear', error: error.message });
@@ -62,5 +61,19 @@ const updateUser = async (req, res)=>{
   }
 }
 
+const deleteUser = async (req, res)=>{
+ try {
+  const id = req.params.id;
+  const user = await User.findByPk(id);
+  if(!user){
+    return res.status(404).json({message: 'Usuario no encontrado'})
+  }
+  await user.destroy();
+  res.status(200).json({ message: 'Usuario eliminado' });
+ } catch (error) {
+  res.status(500).json({ message: 'Error al eliminar usuario' });
+ }
+}
 
-module.exports = { createUser, getAllUsers, getUser, updateUser };
+
+module.exports = { createUser, getAllUsers, getUser, updateUser, deleteUser };
