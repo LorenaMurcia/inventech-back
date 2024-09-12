@@ -22,7 +22,7 @@ const createUser = async (req, res) =>{
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.findAll({
-      attributes:['id_usuario','nombres'],
+      attributes:['id_usuario','correo','nombres','fecha_creacion'],
       include:{
         model:Rol,
         as:'rol',
@@ -32,7 +32,7 @@ const getAllUsers = async (req, res) => {
     console.log(users)
     res.status(200).json(users);
   } catch (error) {
-     res.status(500).json({ message: 'Error al listar usuarios' + error});
+     res.status(500).json({ message: 'Error al listar usuarios' + error}); 
   }
 }
 
@@ -45,7 +45,7 @@ const getUser = async (req, res)=>{
       }
       res.status(200).json(user);
   } catch(err){
-    res.status(500).json({ message: 'Error al listar usuario' });
+    res.status(500).json({ message: 'Error al listar usuario' + err});
   }
 }
 
