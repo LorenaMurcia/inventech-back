@@ -7,7 +7,6 @@ const rol = require('./src/api/rol/rolRoutes');
 const verifyAuth = require('./src/api/middlewares/verifyAuth');
 
 function routes(app) {
-  // app.use('/auth');
   app.use('/api/users', userRoutes); //rutas de  crud de usuarios
   app.use('/api/marca', marcaRoutes)
   app.use('/api/traza', trazaRoutes)

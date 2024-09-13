@@ -17,4 +17,6 @@ const verifyAuth = (req, res, next) =>{
   });
 }
 
+// enviar en el token info del user
+
 module.exports = verifyAuth;
