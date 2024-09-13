@@ -1,4 +1,4 @@
-const Traza = require('./traza_mantenimientos.model');
+const Traza = require('./traza_mantenimiento.model');
 
 const getAll = async (req, res) => {
     try {
