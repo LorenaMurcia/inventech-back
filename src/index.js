@@ -1,10 +1,12 @@
 const express = require('express');
 const routes = require('../routes');
 const sequelize = require('./config/db');
+const cors = require("cors");
 
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 routes(app); //Acrhivo que maneja las rutas de toda la app
 
