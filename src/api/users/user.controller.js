@@ -22,7 +22,7 @@ const createUser = async (req, res) =>{
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.findAll({
-      attributes:['id_usuario','correo','nombres','fecha_creacion'],
+      attributes:['id_usuario','correo','nombres','fecha_creacion', 'contraseña'],
       include:{
         model:Rol,
         as:'rol',
@@ -56,9 +56,10 @@ const updateUser = async (req, res)=>{
     if(!user){
       return res.status(404).json({message: 'Usuario no encontrado'})
       }
-      const {nombres, correo, contraseña} = req.body;
+      const {nombres, correo, contraseña, id_rol,} = req.body;
       if(nombres) user.nombres = nombres;
       if(correo) user.correo = correo;
+      if(id_rol) user.id_rol = id_rol;
       if(contraseña) user.contraseña = await bcrypt.hash(contraseña, 10);
       await user.save();
       res.status(200).json(user);
