@@ -8,7 +8,9 @@ const login = async (req, res)=>{
 
     const user =await User.findOne({where: {
       correo: correo
-    }});
+    },
+    // attributes: ['id_usuario', 'correo', 'nombres', 'id_rol']
+  });
     if(!user){
       return res.status(404).json({message: 'Usuario no encontrado'})
     }
@@ -16,7 +18,12 @@ const login = async (req, res)=>{
     if(!validacion){
       return res.status(401).json({message: 'Datos incorrectos'})
     }
-    const token = jwt.sign({id: user.id}, process.env.SECRET_KEY, {
+    const payload = {
+      id_usuario: user.id_usuario,
+      correo: user.correo,
+      id_rol: user.id_rol,
+    };
+    const token = jwt.sign(payload, process.env.SECRET_KEY, {
       expiresIn: '1h'
     })
     return res.status(200).json({token})

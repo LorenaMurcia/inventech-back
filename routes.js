@@ -12,7 +12,7 @@ function routes(app) {
   app.use('/api/users', userRoutes); //rutas de  crud de usuarios
   app.use('/api/marca', marcaRoutes)
   app.use('/api/traza', trazaRoutes)
-  app.use('/api/equipos', verifyAuth, equiposRoutes)
+  app.use('/api/equipos', equiposRoutes)
   app.use('/api/estado_equipos', estado_EquiposRoutes)
   app.use('/api/roles', rolRoutes)
   app.use('/api/mantenimiento', mantenimientosRoutes)
