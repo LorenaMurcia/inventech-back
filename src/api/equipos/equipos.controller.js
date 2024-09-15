@@ -10,10 +10,10 @@ const createEquipo = async (req, res)=>{
       if(!fecha_registro || !id_marca || !serial || !id_tipo || !memoria_ram || !disco_duro || !procesador || !id_usuario){
         res.status(400).json({ message: 'Todos los campos son obligatorios'})
       }
-      const equipo = await Equipos.create({ fecha_registro,id_marca,serial,id_tipo,memoria_ram,disco_duro,procesador,id_usuario });
+      const equipo = await Equipos.create(req.body);
       res.status(200).json(equipo);
     } catch (error) {
-      res.status(500).json({ message: 'Error al crear', error: error.message })
+      res.status(500).json({ message: 'Error al crear', error })
     }
 }
 
