@@ -24,6 +24,10 @@ const getMantenimiento = async (req, res) => {
 
 const createMantenimientos = async (req, res) => {
   try {
+    const { id_mantenimiento, serial, diagnostico_inicial, fecha_recepcion} = req.body;
+    if(!id_mantenimiento, !serial, !diagnostico_inicial, !fecha_recepcion){
+      res.status(401).json({message: 'se requieren todos los datos'})
+    }
     const mantenimientos = await Mantenimientos.create(req.body);
     res.status(201).json(mantenimientos);
   } catch (error) {
