@@ -1,4 +1,3 @@
-const { json } = require('sequelize');
 const Traza = require('./traza_mantenimiento.model');
 const Estado_equipos = require('../estado_equipos/estado_equipos.model');
 const Equipos = require('../equipos/equipos.model');
@@ -31,7 +30,7 @@ const createTraza = async (req, res) => {
             return res.status(401).json({message: 'El serial del equipo no existe'})
         }
 
-        const traza = await Traza.create({ fecha, descripcion, id_estado, serial, id_mantenimiento });
+        const traza = await Traza.create(body);
         res.status(200).json(traza);
     } catch (error) {
         res.status(500).json({ message: 'Error al crear la traza' + error })
@@ -41,7 +40,7 @@ const createTraza = async (req, res) => {
 const getAllTraza = async (req, res) => {
     try {
         const traza = await Traza.findAll({
-            attributes: ['id_traza', 'fecha', 'descripcion', 'serial'],
+            attributes: ['id_traza', 'fecha', 'descripcion', 'serial', 'id_mantenimiento'],
             include: [{
                 model: Estado_equipos,
                 attributes: ['descripcion'],
