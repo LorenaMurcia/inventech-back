@@ -2,7 +2,7 @@ const express = require('express');
 const routes = require('../routes');
 const sequelize = require('./config/db');
 const cors = require("cors");
-
+require('dotenv').config();
 
 const app = express();
 app.use(express.json());
@@ -18,8 +18,8 @@ sequelize.authenticate()
         return sequelize.sync();
     })
     .then(() => {        
-        app.listen( 3004, () => {
-            console.log(`El servidor está corriendo en el puerto ${3004}`);
+        app.listen( process.env.PORT, () => {
+            console.log(`El servidor está corriendo en el puerto ${process.env.PORT}`);
         });
     })
     .catch(err => {
