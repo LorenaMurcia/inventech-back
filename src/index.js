@@ -13,8 +13,11 @@ routes(app); //Acrhivo que maneja las rutas de toda la app
 
 // Sincronizar la base de datos y luego levantar el servidor
 sequelize.authenticate()
-    .then(() => {
+    .then (() =>{
         console.log('Conexión a la base de datos establecida correctamente');
+        return sequelize.sync();
+    })
+    .then(() => {        
         app.listen( 3004, () => {
             console.log(`El servidor está corriendo en el puerto ${3004}`);
         });
