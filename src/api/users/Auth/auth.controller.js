@@ -23,7 +23,7 @@ const login = async (req, res)=>{
       correo: user.correo,
       id_rol: user.id_rol,
     };
-    const token = jwt.sign(payload, process.env.SECRET_KEY, {
+    const token = jwt.sign(payload, '12345', {
       expiresIn: '1h'
     })
     return res.status(200).json({token})
